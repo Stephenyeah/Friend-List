@@ -8,30 +8,27 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Controller
 public class IndexController {
 
-
+    List<Friend> friends = new ArrayList<>();
 
     @GetMapping("/index")
-    public String friendFrom(Model model) {
+    public String friendFrom(String friendName, Model model) {
 
-        List<Friend> friends = new ArrayList<>();
-        friends.add(new Friend("John West"));
-        friends.add(new Friend("Kate Bower"));
+        // friends.add(new Friend("John West"));
+        // friends.add(new Friend("Kate Bower"));
 
         model.addAttribute("friends", friends);
+        model.addAttribute("friend", new Friend());
+
+        if (friendName != null && !friendName.isEmpty()) {
+            Friend newfriend = new Friend(friendName);
+            friends.add(newfriend);
+
+        }
+
         return "index";
     }
 
-    @GetMapping("newFriend")
-    public String newFriend(Model model){
-        model.addAttribute("friend", new Friend());
-        return "index";
-    }
-    @PostMapping("addFriend")
-    public String addFriend(@ModelAttribute("friend") Friend friend){
-        return "redirect:/index";
-    }
 }

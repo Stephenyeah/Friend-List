@@ -16,7 +16,7 @@
         </ul>
 
         <h1>Add new friend to list</h1>
-        <form th:action="@{/addFriend}" th:object="${friend}" method="post">
+        <form th:action="@{/index}" th:object="${friend}" method="get">
             <label>Name:</label>
             <input type="text" placeholder=" " th:field="*{friendName}" />
             <button type="submit">Submit</button>
